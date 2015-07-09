@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<ui:composition template="/layout.xhtml">
+	<ui:define name="header">
+		<h2>Cadastre-se neste evento</h2>
+	</ui:define>
+	<ui:define name="content">
+		<h:form prependId="false">
+			<h:messages id="mensagens" />
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nome" for="nome" />
+                                <h:inputText id="nome" value="#{cadastroBean.participante.nome}"  />
+				
+				<h:outputLabel value="Empresa" for="empresa" />
+				<h:inputText id="empresa" value="#{cadastroBean.participante.empresa}"  />
+				
+				<h:outputLabel value="Cargo" for="cargo" />
+				<h:inputText id="cargo" value="#{cadastroBean.participante.cargo}"  />
+				
+				<h:outputLabel value="Telefone" for="telefone" />
+				<h:inputText id="telefone" value="#{cadastroBean.participante.telefone}" />
+				
+				<h:outputLabel value="E-mail" for="email" />
+				<h:inputText id="email" value="#{cadastroBean.participante.email}" />
+			
+				<h:outputLabel value="CEP" for="cep" />
+				<h:inputText id="cep" value="#{cadastroBean.participante.endereco.cep}" />
+
+				<h:outputLabel value="UF" for="uf" />
+                                <h:selectOneMenu id="uf" value="#{enderecoBean.uf}" converter="ufConverter">
+					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true" />
+					<f:selectItems value="#{enderecoBean.ufs}" var="uf" itemLabel="#{uf.sigla}" itemValue="#{uf}"  />
+					<f:ajax execute="@this" render=":cidade :bairro :mensagens" listener="#{enderecoBean.atualizaCidades}" />
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Cidade" for="cidade" />
+				<h:selectOneMenu id="cidade" value="#{enderecoBean.cidade}" converter="cidadeConverter">
+					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true" />
+					<f:selectItems value="#{enderecoBean.cidades}" var="c" itemLabel="#{c.nome}" itemValue="#{c}"  />
+					<f:ajax execute="@this" render=":bairro :mensagens" listener="#{enderecoBean.atualizaBairros}" />
+				</h:selectOneMenu>
+				
+				<h:outputLabel value="Bairro" for="bairro" />
+				<h:selectOneMenu id="bairro" value="#{cadastroBean.participante.endereco.bairro}" converter="bairroConverter">
+					<f:selectItem itemLabel="--Selecione--" noSelectionOption="true" />
+					<f:selectItems value="#{enderecoBean.bairros}" var="b" itemLabel="#{b.nome}" itemValue="#{b}"  />
+				</h:selectOneMenu>
+
+				<h:outputLabel value="Logradouro" for="logradouro" />
+				<h:inputText id="logradouro" value="#{cadastroBean.participante.endereco.logradouro}" />
+				
+				<h:outputLabel value="Número" for="numero" />
+				<h:inputText id="numero" value="#{cadastroBean.participante.endereco.numero}" />
+				
+				<h:outputLabel value="Complemento" for="complemento" />
+				<h:inputText id="complemento" value="#{cadastroBean.participante.endereco.complemento}" />
+				
+			</h:panelGrid>
+			
+			<h:commandButton value="Cadastrar" actionListener="#{cadastroBean.gravar}" />
+		</h:form>
+	</ui:define>
+</ui:composition>
+</html>

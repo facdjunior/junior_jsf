@@ -1,0 +1,28 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+<title><ui:insert name="title">Cadastre-se neste evento</ui:insert></title>
+</h:head>
+
+<body>
+	<div id="header">
+		<ui:insert name="header" />
+	</div>
+	<hr />
+	<div id="content">
+		<ui:insert name="content" />
+	</div>
+	<hr />
+	<div id="footer">
+		<h:form>
+			<h:commandLink value="Cadastro" action="cadastro?faces-redirect=true" /> | 
+			<h:commandLink value="Todos os participantes" action="lista-participantes?faces-redirect=true" />
+		</h:form>
+	</div>
+</body>
+
+</html>
